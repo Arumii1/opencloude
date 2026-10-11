@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вхід / Реєстрація</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-mode">
+
+<div class="container">
+    <div class="form-box">
+
+        <!-- ВХІД -->
+        <section id="loginPage">
+            <h1>Вхід</h1>
+
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="loginIdentifier">Пошта або телефон</label>
+                    <input
+                        type="text"
+                        id="loginIdentifier"
+                        placeholder="Введіть пошту або телефон"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="loginPassword">Пароль</label>
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Введіть пароль"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="main-button">Увійти</button>
+            </form>
+
+            <p class="forgot">
+                <button type="button" id="forgotButton">
+                    Забули пароль?
+                </button>
+            </p>
+
+            <p class="switch">
+                Немає акаунта?
+                <button type="button" id="openRegister">
+                    Зареєструватися
+                </button>
+            </p>
+
+            <p class="message" id="loginMessage" aria-live="polite"></p>
+        </section>
+
+
+        <!-- РЕЄСТРАЦІЯ -->
+        <section id="registerPage" hidden>
+            <h1>Реєстрація</h1>
+
+            <form id="registerForm">
+                <div class="input-group">
+                    <label for="firstName">Ім'я</label>
+                    <input
+                        type="text"
+                        id="firstName"
+                        placeholder="Введіть ім'я"
+                        autocomplete="given-name"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="lastName">Прізвище</label>
+                    <input
+                        type="text"
+                        id="lastName"
+                        placeholder="Введіть прізвище"
+                        autocomplete="family-name"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="registerEmail">Електронна пошта</label>
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        placeholder="example@gmail.com"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="registerPhone">Номер телефону</label>
+                    <input
+                        type="tel"
+                        id="registerPhone"
+                        placeholder="+380XXXXXXXXX"
+                        autocomplete="tel"
+                        pattern="[+0-9() -]{10,20}"
+                        title="Введіть коректний номер телефону"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="registerPassword">Пароль</label>
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        placeholder="Мінімум 8 символів"
+                        minlength="8"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmPassword">Повторіть пароль</label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Повторіть пароль"
+                        minlength="8"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="main-button">
+                    Зареєструватися
+                </button>
+            </form>
+
+            <p class="switch">
+                Уже є акаунт?
+                <button type="button" id="backToLogin">
+                    Увійти
+                </button>
+            </p>
+
+            <p class="message" id="registerMessage" aria-live="polite"></p>
+        </section>
+
+
+        <!-- ВІДНОВЛЕННЯ ПАРОЛЯ -->
+        <section id="forgotPage" hidden>
+            <h1>Відновлення пароля</h1>
+
+            <p class="description">
+                Введіть пошту або номер телефону, зазначені під час реєстрації.
+            </p>
+
+            <form id="recoveryForm">
+                <div class="input-group">
+                    <label for="recoveryIdentifier">Пошта або телефон</label>
+                    <input
+                        type="text"
+                        id="recoveryIdentifier"
+                        placeholder="Введіть пошту або телефон"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="main-button">
+                    Отримати код
+                </button>
+            </form>
+
+            <p class="message" id="recoveryMessage" aria-live="polite"></p>
+
+            <!-- ПЕРЕВІРКА КОДУ -->
+            <form id="verifyForm" hidden>
+                <div class="input-group">
+                    <label for="verificationCode">Код підтвердження</label>
+                    <input
+                        type="text"
+                        id="verificationCode"
+                        placeholder="Введіть 6-значний код"
+                        inputmode="numeric"
+                        pattern="[0-9]{6}"
+                        maxlength="6"
+                        autocomplete="one-time-code"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="main-button">
+                    Підтвердити код
+                </button>
+            </form>
+
+            <!-- НОВИЙ ПАРОЛЬ -->
+            <form id="newPasswordForm" hidden>
+                <div class="input-group">
+                    <label for="newPassword">Новий пароль</label>
+                    <input
+                        type="password"
+                        id="newPassword"
+                        placeholder="Мінімум 8 символів"
+                        minlength="8"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmNewPassword">Повторіть новий пароль</label>
+                    <input
+                        type="password"
+                        id="confirmNewPassword"
+                        placeholder="Повторіть пароль"
+                        minlength="8"
+                        autocomplete="new-password"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="main-button">
+                    Змінити пароль
+                </button>
+            </form>
+
+            <p class="switch">
+                <button type="button" id="backFromRecovery">
+                    ← Повернутися до входу
+                </button>
+            </p>
+        </section>
+
+    </div>
+</div>
+
+  <div class="app" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="#" data-page="home">
+        <span class="brand-icon">М</span>
+        <span>
+          <strong>Місто.Разом</strong>
+          <small>Твій голос має значення</small>
+        </span>
+      </a>
+
+      <div class="menu-title">НАВІГАЦІЯ</div>
+
+      <nav class="navigation">
+        <button class="nav-item active" data-page="home">
+          <span>⌂</span> Основна
+        </button>
+        <button class="nav-item" data-page="about">
+          <span>ⓘ</span> Про портал
+        </button>
+        <button class="nav-item" data-page="author">
+          <span>♙</span> Про автора
+        </button>
+        <button class="nav-item" data-page="support">
+          <span>✉</span> Підтримка
+        </button>
+        <button class="nav-item" data-page="profile">
+          <span>◎</span> Мій профіль
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="city-card">
+          <span class="city-symbol">✦</span>
+          <strong>Творимо зміни разом</strong>
+          <p>Кожна ідея може зробити наше місто кращим.</p>
+        </div>
+        <small class="copyright">© 2026 Місто.Разом</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <span class="eyebrow">ГРОМАДСЬКА ІНІЦІАТИВА</span>
+          <p class="topbar-title">Твій голос важливий</p>
+        </div>
+        <button class="profile-shortcut" data-page="profile">
+          <span class="avatar-small" id="header-avatar">М</span>
+          <span id="header-name">Мій профіль</span>
+        </button>
+      </header>
+
+      <div class="content">
+
+        <!-- ОСНОВНА -->
+        <section class="page active" id="home">
+          <div class="hero">
+            <div class="hero-content">
+              <span class="pill">
+                <span class="status-dot"></span>
+                Простір для твоїх ідей
+              </span>
+
+              <h1>На коротку ногу<br>з владою <span>міста.</span></h1>
+
+              <p>
+                Маєш ідею, як зробити Житомир кращим?
+                Не мовчи — пропонуй, надихай, змінюй!
+              </p>
+
+              <button class="hero-button" id="start-button">
+                Поділитися ідеєю <span>↓</span>
+              </button>
+            </div>
+
+            <div class="hero-decoration" aria-hidden="true">
+              <div class="circle circle-one"></div>
+              <div class="circle circle-two"></div>
+              <div class="city-icon">⌂</div>
+              <span class="floating-note note-one">✦ Нові ідеї</span>
+              <span class="floating-note note-two">♡ Твоє місто</span>
+            </div>
+          </div>
+
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">МИ СЛУХАЄМО</span>
+              <h2>Ваші побажання та ідеї</h2>
+              <p>Розкажи, що можна покращити у нашому місті.</p>
+            </div>
+            <span class="heading-icon">✎</span>
+          </div>
+
+          <form id="idea-form" class="idea-card">
+            <label for="idea-category">Категорія звернення</label>
+            <select id="idea-category" name="category">
+              <option value="Благоустрій міста">Благоустрій міста</option>
+              <option value="Молодь та освіта">Молодь та освіта</option>
+              <option value="Транспорт">Транспорт</option>
+              <option value="Екологія">Екологія</option>
+              <option value="Культура та дозвілля">Культура та дозвілля</option>
+              <option value="Інше">Інше</option>
+            </select>
+
+            <label for="idea-message">Твоя ідея або побажання</label>
+            <textarea
+              id="idea-message"
+              name="message"
+              rows="6"
+              minlength="10"
+              maxlength="5000"
+              required
+              placeholder="Наприклад: я пропоную облаштувати більше зон відпочинку для молоді..."
+            ></textarea>
+
+            <div class="form-footer">
+              <span id="char-count">0 / 5000 символів</span>
+              <button type="submit" class="submit-button" id="submit-button">
+                Відправити ідею <span>→</span>
+              </button>
+            </div>
+
+            <p class="form-message" id="form-message" role="status"></p>
+            <p class="privacy-note">
+              ♡ Твоя думка важлива. Будьмо ввічливими та конструктивними.
+            </p>
+          </form>
+
+          <div class="bottom-note">
+            <span class="bottom-note-icon">✦</span>
+            <div>
+              <strong>Маленькі ідеї — великі зміни</strong>
+              <p>Місто стає кращим тоді, коли його жителі небайдужі.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ПРО ПОРТАЛ -->
+        <section class="page" id="about">
+          <div class="page-banner">
+            <span class="eyebrow">НАША МЕТА</span>
+            <h1>Місто починається з тебе.</h1>
+            <p>Платформа, яка допомагає почути голос кожного.</p>
+          </div>
+
+          <article class="info-card">
+            <span class="large-icon">◉</span>
+            <h2>Про портал</h2>
+            <p>
+              «Місто.Разом» — це простір, створений для того, щоб молодь
+              та інші жителі нашого міста могли бути ближчими до міської
+              влади, ділитися власними думками й пропонувати рішення
+              актуальних проблем.
+            </p>
+            <p>
+              Ми віримо, що кожен житель може зробити внесок у розвиток
+              громади. Іноді для великих змін достатньо однієї простої
+              ідеї: облаштувати громадський простір, покращити дозвілля
+              молоді, подбати про чистоту вулиць або зробити місто
+              комфортнішим для всіх.
+            </p>
+            <p>
+              Наша мета — створити зручний канал для висловлення
+              пропозицій, заохочувати громадську активність і показати,
+              що думка кожного має значення.
+            </p>
+            <button class="submit-button" data-page="home">
+              Запропонувати ідею →
+            </button>
+          </article>
+
+          <div class="feature-grid">
+            <div class="feature-card">
+              <span>01</span>
+              <h3>Будь почутим</h3>
+              <p>Ділися думками та розповідай про проблеми.</p>
+            </div>
+            <div class="feature-card">
+              <span>02</span>
+              <h3>Пропонуй рішення</h3>
+              <p>Допомагай знаходити ідеї для розвитку громади.</p>
+            </div>
+            <div class="feature-card">
+              <span>03</span>
+              <h3>Змінюй майбутнє</h3>
+              <p>Долучайся до формування комфортного міста.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ПРО АВТОРА -->
+        <section class="page" id="author">
+          <div class="page-banner">
+            <span class="eyebrow">ЛЮДИ ЗА ІДЕЄЮ</span>
+            <h1>Усе починається з небайдужості.</h1>
+            <p>Знайомство з авторкою проєкту.</p>
+          </div>
+
+          <article class="author-card">
+            <div class="author-avatar">А</div>
+            <div class="author-info">
+              <span class="eyebrow">АВТОРКА ПРОЄКТУ</span>
+              <h2>Марченко Анна</h2>
+              <p class="author-study">
+                Житомирський Кооперативний Коледж Бізнесу і Права
+              </p>
+              <div class="author-divider"></div>
+              <p>
+                Мене звати Марченко Анна, я навчаюся в Житомирському
+                Кооперативному Коледжі Бізнесу і Права.
+              </p>
+              <p>
+                На створення цього порталу мене надихнуло бажання
+                допомогти молоді бути почутою. Я бачила, що в нашому
+                місті є багато активних і небайдужих молодих людей,
+                які хочуть змінювати його на краще, але не завжди
+                знають, як донести свої ідеї до тих, хто може допомогти
+                втілити їх у життя.
+              </p>
+              <p>
+                Саме тому я вирішила створити простір, де кожен зможе
+                поділитися своїми пропозиціями, висловити думку та
+                зробити маленький крок до великих змін.
+              </p>
+              <p>
+                Я вірю, що активна молодь — це майбутнє нашого міста,
+                а спільні зусилля здатні зробити його комфортнішим,
+                сучаснішим і кращим для кожного.
+              </p>
+            </div>
+          </article>
+        </section>
+
+        <!-- ПІДТРИМКА -->
+        <section class="page" id="support">
+          <div class="page-banner">
+            <span class="eyebrow">МИ НА ЗВ'ЯЗКУ</span>
+            <h1>Маєш запитання?</h1>
+            <p>Я відкрита до спілкування, пропозицій і відгуків.</p>
+          </div>
+
+          <div class="support-grid">
+            <article class="contact-card">
+              <div class="contact-icon">✉</div>
+              <span class="eyebrow">ЕЛЕКТРОННА ПОШТА</span>
+              <h2>Напиши мені</h2>
+              <p>Для запитань, пропозицій та повідомлень про роботу порталу.</p>
+              <a href="mailto:annmarchenko13@gmail.com">
+                annmarchenko13@gmail.com
+              </a>
+            </article>
+
+            <article class="contact-card">
+              <div class="contact-icon">♧</div>
+              <span class="eyebrow">ТЕЛЕФОН</span>
+              <h2>Зателефонуй</h2>
+              <p>Якщо тобі зручніше поспілкуватися телефоном.</p>
+              <a href="tel:+380632761575">+380 63 276 15 75</a>
+            </article>
+          </div>
+
+          <div class="bottom-note">
+            <span class="bottom-note-icon">♡</span>
+            <div>
+              <strong>Дякую за твою небайдужість!</strong>
+              <p>Кожне звернення допомагає робити портал кращим.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- МІЙ ПРОФІЛЬ -->
+        <section class="page" id="profile">
+          <div class="page-banner">
+            <span class="eyebrow">ОСОБИСТИЙ КАБІНЕТ</span>
+            <h1>Мій профіль</h1>
+            <p>Твоя інформація та налаштування облікового запису.</p>
+          </div>
+
+          <form class="profile-card" id="profile-form">
+            <div class="profile-cover"></div>
+
+            <div class="profile-photo-row">
+              <div class="profile-avatar" id="profile-avatar">М</div>
+              <div>
+                <h2 id="profile-heading">Твій профіль</h2>
+                <p>Учасник порталу «Місто.Разом»</p>
+              </div>
+            </div>
+
+            <label for="photo-input" class="upload-button">
+              Додати фото профілю
+            </label>
+            <input
+              type="file"
+              id="photo-input"
+              accept="image/png,image/jpeg,image/webp"
+              hidden
+            >
+            <p class="helper-text">JPG, PNG або WebP. Максимум 2 МБ.</p>
+
+            <div class="profile-fields">
+              <div class="field">
+                <label for="first-name">Ім'я</label>
+                <input id="first-name" name="firstName" type="text"
+                  autocomplete="given-name" placeholder="Твоє ім'я" required>
+              </div>
+              <div class="field">
+                <label for="last-name">Прізвище</label>
+                <input id="last-name" name="lastName" type="text"
+                  autocomplete="family-name" placeholder="Твоє прізвище" required>
+              </div>
+              <div class="field">
+                <label for="phone">Номер телефону</label>
+                <input id="phone" name="phone" type="tel"
+                  autocomplete="tel" placeholder="+380..." required>
+              </div>
+              <div class="field">
+                <label for="email">Електронна адреса</label>
+                <input id="email" name="email" type="email"
+                  autocomplete="email" placeholder="name@example.com" required>
+              </div>
+            </div>
+
+            <button class="submit-button" type="submit">
+              Зберегти зміни →
+            </button>
+            <p class="form-message" id="profile-message" role="status"></p>
+          </form>
+        </section>
+
+      </div>
+      <footer class="footer">
+        Створено з любов'ю до рідного міста <span>♥</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
