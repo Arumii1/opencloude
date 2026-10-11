@@ -908,6 +908,13 @@ a {
   background-size: cover;
   background-position: center;
 }
+.profile-info h1 {
+    margin-top: 35px;
+}
+
+.profile-info p {
+    margin-top: 12px;
+}
 
 .profile-avatar.has-photo {
   color: transparent;
